@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Dashboard from "./page/Dashboard";
 import Layout from "./component/view/layout";
 function App() {
   return (

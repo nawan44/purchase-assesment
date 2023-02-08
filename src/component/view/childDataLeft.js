@@ -32,7 +32,7 @@ export default function ChildDataLeft() {
     <div
       style={{
         padding: "10px 50px 10px 0",
-        width: "30%",
+        // width: "30%",
         height: "100%",
         // background: "red",
         float: "left",
@@ -40,7 +40,7 @@ export default function ChildDataLeft() {
     >
       <h5
         style={{
-          color: "#fff",
+          color: "#00388B",
           fontWeight: "bold",
           textAlign: "left",
           margin: "0 0 30px 0",
@@ -175,6 +175,7 @@ export default function ChildDataLeft() {
             background: "#00388B",
             float: "right",
             margin: "20px 0 40px 0s",
+            textTransform: "none",
           }}
         >
           Apply

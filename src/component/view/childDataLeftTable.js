@@ -14,6 +14,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: "#00388B",
     color: theme.palette.common.white,
     fontWeight: "bold",
+    borderLeft: "1px solid rgba(224, 224, 224, 1)",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -49,7 +50,11 @@ export default function ChildDataLeftTable() {
   };
   return (
     <TableContainer component={Paper}>
-      <Table style={{ width: "100%" }} aria-label="customized table">
+      <Table
+        style={{ width: "100%" }}
+        size="small"
+        aria-label="customized table"
+      >
         <TableHead>
           <TableRow>
             <StyledTableCell>Product ID</StyledTableCell>
@@ -60,7 +65,11 @@ export default function ChildDataLeftTable() {
           {rows.map((row) => (
             <StyledTableRow key={row.productId}>
               <StyledTableCell component="th" scope="row">
-                <Button variant="contained" style={{ background: "none" }}>
+                <Button
+                  variant="contained"
+                  style={{ background: "none", textTransform: "none" }}
+                  size="small"
+                >
                   <h5 style={{ color: "#000" }}>{row.productId}</h5>
                 </Button>
               </StyledTableCell>
