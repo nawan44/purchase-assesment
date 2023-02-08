@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 
 export default function ChildDataRight(props) {
   const { lihatData, setLihatData, itemData } = props;
+  const [openRow, setOpenRow] = React.useState(false);
 
   console.log("itemData==============", itemData);
   return (
@@ -85,12 +86,19 @@ export default function ChildDataRight(props) {
               fontWeight: "bold",
               textTransform: "none",
             }}
+            onClick={() => {
+              setOpenRow(true);
+            }}
           >
             + Tambah
           </Button>
         </div>
       </div>
-      <ChildDataRightTable />
+      <ChildDataRightTable
+        itemData={itemData}
+        openRow={openRow}
+        setOpenRow={setOpenRow}
+      />
     </div>
   );
 }

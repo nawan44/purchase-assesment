@@ -10,7 +10,13 @@ import {
   Paper,
   TableCell,
   tableCellClasses,
+  IconButton,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
+// import { red } from "@mui/material/colors";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,45 +40,37 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  vendor,
-  vendorName,
-  foreign,
-  currency,
-  price,
-  date,
-  qty_pricing,
-  min_order,
-  decription,
-  action
-) {
-  return {
-    vendor,
-    vendorName,
-    foreign,
-    currency,
-    price,
-    date,
-    qty_pricing,
-    min_order,
-    decription,
-    action,
-  };
-}
+// function createData(
+//   vendor,
+//   vendorName,
+//   foreign,
+//   currency,
+//   price,
+//   date,
+//   qty_pricing,
+//   min_order,
+//   decription,
+//   action
+// ) {
+//   return {
+//     vendor,
+//     vendorName,
+//     foreign,
+//     currency,
+//     price,
+//     date,
+//     qty_pricing,
+//     min_order,
+//     decription,
+//     action,
+//   };
+// }
 
-const rows = [
-  createData("1.L11", "Dummy Product 1"),
-  createData("1.L12", "Dummy Product 2"),
-  createData("1.L13", "Dummy Product 3"),
-  createData("1.L14", "Dummy Product 4"),
-  createData("1.L15", "Dummy Product 5"),
-];
-export default function ChildDataRightTable() {
-  // const [age, setAge] = React.useState("");
+export default function ChildDataRightTable(props) {
+  const { itemData, openRow, setOpenRow } = props;
 
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
+  console.log("itemData /////////", itemData);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -95,29 +93,109 @@ export default function ChildDataRightTable() {
               <StyledTableCell></StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.productId}>
-                <StyledTableCell component="th" scope="row">
-                  <Button
-                    variant="contained"
-                    style={{ background: "none", textTransform: "none" }}
-                    size="small"
+          {openRow && (
+            <TableBody>
+              {/* {itemData &&
+              itemData.map((row) => ( */}
+              <StyledTableRow key={itemData.productId}>
+                <StyledTableCell
+                  style={{ padding: 0 }}
+                  component="th"
+                  scope="row"
+                >
+                  {/* <Button
+                  variant="contained"
+                  style={{
+                    padding: "10px 0",
+                    background: "none",
+                    textTransform: "none",
+                    width: "30px",
+                  }}
+                  size="small"
+                  endIcon={<SearchIcon color="primary" />}
+                ></Button> */}
+
+                  <IconButton
+                    style={{ float: "right" }}
+                    sx={{
+                      padding: 2,
+                      width: 10,
+                      height: 10,
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "primary.main",
+                    }}
                   >
-                    <h5 style={{ color: "#000" }}>{row.productId}</h5>
-                  </Button>
+                    <SearchIcon />
+                  </IconButton>
                 </StyledTableCell>
-                <StyledTableCell>{row.foreign}</StyledTableCell>
-                <StyledTableCell>{row.currency}</StyledTableCell>
-                <StyledTableCell>{row.price}</StyledTableCell>
-                <StyledTableCell>{row.date}</StyledTableCell>
-                <StyledTableCell>{row.qty_pricing}</StyledTableCell>
-                <StyledTableCell>{row.min_order}</StyledTableCell>
-                <StyledTableCell>{row.decription}</StyledTableCell>
-                <StyledTableCell>{row.action}</StyledTableCell>
+                <StyledTableCell>
+                  {/* {itemData.productName} */}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {/* {itemData.data.foreign} */}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {/* {itemData.data.currency} */}
+                </StyledTableCell>
+                <StyledTableCell>{/* {itemData.data.price} */}</StyledTableCell>
+                <StyledTableCell style={{ padding: 0 }}>
+                  {" "}
+                  <IconButton
+                    style={{ float: "right" }}
+                    sx={{
+                      padding: 2,
+                      width: 20,
+                      height: 20,
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "primary.main",
+                    }}
+                  >
+                    <CalendarTodayIcon sx={{ fontSize: 20 }} />
+                  </IconButton>
+                </StyledTableCell>
+                <StyledTableCell style={{ margin: 0, textAlign: "center" }}>
+                  {" "}
+                  <IconButton
+                    sx={{
+                      padding: 2,
+                      width: 20,
+                      height: 20,
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "primary.main",
+                    }}
+                  >
+                    <CheckIcon sx={{ fontSize: 20 }} />
+                  </IconButton>
+                </StyledTableCell>{" "}
+                <StyledTableCell>
+                  {/* {itemData.data.min_order} */}
+                </StyledTableCell>
+                <StyledTableCell>
+                  {/* {itemData.data.decription} */}
+                </StyledTableCell>
+                <StyledTableCell style={{ margin: 0, textAlign: "center" }}>
+                  {" "}
+                  <IconButton
+                    sx={{
+                      padding: 2,
+                      width: 20,
+                      height: 20,
+                      borderRadius: 1,
+                      border: "1px solid",
+                      borderColor: "primary.main",
+                      color: "red",
+                    }}
+                  >
+                    <DeleteIcon sx={{ fontSize: 20 }} />
+                  </IconButton>
+                </StyledTableCell>
               </StyledTableRow>
-            ))}
-          </TableBody>
+              {/* ))} */}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
       <Button
