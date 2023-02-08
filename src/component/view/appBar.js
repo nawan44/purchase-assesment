@@ -17,7 +17,7 @@ export default function TopBar() {
               background: "#fff",
               borderRadius: "0 0 40% 40%",
               border: " 1px solid ",
-              width: "80%",
+              width: "75%",
               height: "85px",
             }}
           ></div>
