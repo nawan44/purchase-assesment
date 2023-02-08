@@ -6,6 +6,11 @@ import { Typography } from "@mui/material";
 export default function ChildDataRight(props) {
   const { lihatData, setLihatData, itemData } = props;
   const [openRow, setOpenRow] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+    console.log("AAAA");
+  };
 
   console.log("itemData==============", itemData);
   return (
@@ -98,6 +103,9 @@ export default function ChildDataRight(props) {
         itemData={itemData}
         openRow={openRow}
         setOpenRow={setOpenRow}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        handleOpenModal={handleOpenModal}
       />
     </div>
   );

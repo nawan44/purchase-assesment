@@ -8,6 +8,7 @@ export default function ChildData() {
     aksiData: "",
     itemData: "",
   });
+
   return (
     <div
       style={{
