@@ -1,10 +1,8 @@
-import { Typography } from "@mui/material";
-import { Outlet, Link } from "react-router-dom";
 import TopBar from "./appBar";
 import ChildData from "./childData";
 import ChildMenu from "./childMenu";
-import ClippedDrawer from "./clippedDrawer";
 import MenuBar from "./menuBar";
+
 const Layout = () => {
   return (
     <>

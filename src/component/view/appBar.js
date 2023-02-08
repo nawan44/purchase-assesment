@@ -1,10 +1,4 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import { Toolbar, Tooltip } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ClippedDrawer from "./clippedDrawer";
+import { Tooltip, IconButton } from "@mui/material";
 import Avatar from "../../assets/avatar/avatar.png";
 
 export default function TopBar() {
@@ -33,7 +27,6 @@ export default function TopBar() {
             float: "left",
             width: "65%",
             padding: "22px 0",
-            // background: "red",
           }}
         >
           <div
@@ -52,7 +45,6 @@ export default function TopBar() {
             float: "left",
             width: "20%",
             padding: "20px 30px",
-            // background: "green",
           }}
         >
           <Tooltip style={{ float: "left" }}>
