@@ -42,7 +42,7 @@ export default function TopBar() {
         </div>
         <div
           style={{
-            float: "left",
+            float: "right",
             width: "20%",
             padding: "20px 30px",
           }}

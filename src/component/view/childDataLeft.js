@@ -8,13 +8,18 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import ChildDataLeftTable from "./childDataLeftTable";
+import dataDummy from "../../data/dummy";
 
-export default function ChildDataLeft() {
+export default function ChildDataLeft(props) {
+  const { lihatData, setLihatData, selectData, setSelectData, itemData } =
+    props;
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  console.log("data", dataDummy);
   return (
     <div
       style={{
@@ -168,7 +173,14 @@ export default function ChildDataLeft() {
           Apply
         </Button>
       </div>
-      <ChildDataLeftTable />
+      <ChildDataLeftTable
+        dataDummy={dataDummy}
+        selectData={selectData}
+        setSelectData={setSelectData}
+        lihatData={lihatData}
+        setLihatData={setLihatData}
+        itemData={itemData}
+      />
     </div>
   );
 }

@@ -3,6 +3,11 @@ import ChildDataLeft from "./childDataLeft";
 import ChildDataRight from "./childDataRight";
 
 export default function ChildData() {
+  const [lihatData, setLihatData] = React.useState();
+  const [selectData, setSelectData] = React.useState({
+    aksiData: "",
+    itemData: "",
+  });
   return (
     <div
       style={{
@@ -21,7 +26,13 @@ export default function ChildData() {
         }}
       >
         {" "}
-        <ChildDataLeft />
+        <ChildDataLeft
+          selectData={selectData}
+          setSelectData={setSelectData}
+          lihatData={lihatData}
+          setLihatData={setLihatData}
+          itemData={selectData.itemData}
+        />
       </div>
       <div
         style={{
@@ -30,7 +41,13 @@ export default function ChildData() {
         }}
       >
         {" "}
-        <ChildDataRight />
+        <ChildDataRight
+          selectData={selectData}
+          setSelectData={setSelectData}
+          lihatData={lihatData}
+          setLihatData={setLihatData}
+          itemData={selectData.itemData}
+        />
       </div>
     </div>
   );

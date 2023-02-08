@@ -1,8 +1,12 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import ChildDataRightTable from "./childDataRightTable";
+import { Typography } from "@mui/material";
 
-export default function ChildDataRight() {
+export default function ChildDataRight(props) {
+  const { lihatData, setLihatData, itemData } = props;
+
+  console.log("itemData==============", itemData);
   return (
     <div
       style={{
@@ -53,17 +57,38 @@ export default function ChildDataRight() {
           textAlign: "right",
         }}
       >
-        <Button
-          variant="contained"
-          size="small"
+        <div
           style={{
-            background: "#00388B",
-            fontWeight: "bold",
-            textTransform: "none",
+            width: "90%",
+            float: "left",
+            padding: "2px 0",
           }}
         >
-          + Tambah
-        </Button>
+          {lihatData && (
+            <h5
+              style={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "#073E8B",
+              }}
+            >
+              {itemData.productId} - {itemData.productName}
+            </h5>
+          )}
+        </div>
+        <div style={{ width: "10%", float: "right" }}>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              background: "#00388B",
+              fontWeight: "bold",
+              textTransform: "none",
+            }}
+          >
+            + Tambah
+          </Button>
+        </div>
       </div>
       <ChildDataRightTable />
     </div>

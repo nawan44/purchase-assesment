@@ -44,9 +44,18 @@ const rows = [
   createData("1.L14", "Dummy Product 4"),
   createData("1.L15", "Dummy Product 5"),
 ];
-export default function ChildDataLeftTable() {
+export default function ChildDataLeftTable(props) {
+  const {
+    dataDummy,
+    selectData,
+    setSelectData,
+    lihatData,
+    setLihatData,
+    itemData,
+  } = props;
   // const [age, setAge] = React.useState("");
 
+  console.log("selectData", selectData);
   // const handleChange = (event) => {
   //   setAge(event.target.value);
   // };
@@ -64,18 +73,29 @@ export default function ChildDataLeftTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.productId}>
+          {/* rows.map */}
+          {dataDummy?.map((itemData) => (
+            <StyledTableRow key={itemData.productId}>
               <StyledTableCell component="th" scope="row">
                 <Button
+                  key={itemData.id}
+                  onClick={() => {
+                    setSelectData({
+                      aksiData: "lihatData",
+                      itemData,
+                    });
+                    setLihatData(true);
+                  }}
                   variant="contained"
                   style={{ background: "none", textTransform: "none" }}
                   size="small"
                 >
-                  <h5 style={{ color: "#000" }}>{row.productId}</h5>
+                  <h5 style={{ color: "#000" }}>{itemData.productId}</h5>
                 </Button>
               </StyledTableCell>
-              <StyledTableCell align="left">{row.productName}</StyledTableCell>
+              <StyledTableCell align="left">
+                {itemData.productName}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
