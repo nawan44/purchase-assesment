@@ -17,7 +17,7 @@ export default function TopBar() {
               background: "#fff",
               borderRadius: "0 0 40% 40%",
               border: " 1px solid ",
-              width: "75%",
+              width: "80%",
               height: "85px",
             }}
           ></div>
@@ -25,7 +25,7 @@ export default function TopBar() {
         <div
           style={{
             float: "left",
-            width: "65%",
+            width: "60%",
             padding: "22px 0",
           }}
         >
