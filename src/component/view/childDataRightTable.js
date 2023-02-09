@@ -91,12 +91,21 @@ const style = {
 };
 
 export default function ChildDataRightTable(props) {
-  const { itemData, openRow, handleOpenModal, openModal, setOpenModal } = props;
+  const {
+    itemData,
+    openRow,
+    handleOpenModal,
+    openModal,
+    setOpenModal,
+    itemSupplier,
+    selectSupplier,
+    setSelectSupplier,
+  } = props;
   // const [form] = Input.useForm();
-
   const handleCloseModal = () => setOpenModal(false);
 
-  console.log("itemData /////////", itemData);
+  console.log("itemSupplier /////////", itemSupplier);
+  console.log("selectSupplier /////////", selectSupplier);
 
   return (
     <>
@@ -126,21 +135,19 @@ export default function ChildDataRightTable(props) {
               itemData.map((row) => ( */}
               <StyledTableRow key={itemData.productId}>
                 <StyledTableCell
-                  style={{ padding: 0 }}
+                  style={{ background: "#ddd", padding: 0, height: 10 }}
                   component="th"
                   scope="row"
                 >
-                  {/* <Button
-                  variant="contained"
-                  style={{
-                    padding: "10px 0",
-                    background: "none",
-                    textTransform: "none",
-                    width: "30px",
-                  }}
-                  size="small"
-                  endIcon={<SearchIcon color="primary" />}
-                ></Button> */}
+                  <div
+                    style={{
+                      width: "60px",
+                      float: "left",
+                      padding: "10px 3px",
+                    }}
+                  >
+                    {itemSupplier.supplierCode}
+                  </div>
 
                   <IconButton
                     onClick={handleOpenModal}
@@ -149,16 +156,24 @@ export default function ChildDataRightTable(props) {
                       padding: 2,
                       width: 10,
                       height: 10,
+                      margin: 0,
                       borderRadius: 1,
                       border: "1px solid",
+                      background: "#fff",
                       borderColor: "primary.main",
                     }}
                   >
                     <SearchIcon />
                   </IconButton>
                 </StyledTableCell>
-                <StyledTableCell>
-                  {/* {itemData.productName} */}
+                <StyledTableCell
+                  style={{
+                    background: "#ddd",
+                    padding: "0 0 0 5px",
+                    height: 10,
+                  }}
+                >
+                  {itemSupplier.supplierName}
                 </StyledTableCell>
                 <StyledTableCell>
                   {/* {itemData.data.foreign} */}
@@ -167,7 +182,9 @@ export default function ChildDataRightTable(props) {
                   {/* {itemData.data.currency} */}
                 </StyledTableCell>
                 <StyledTableCell>{/* {itemData.data.price} */}</StyledTableCell>
-                <StyledTableCell style={{ padding: 0 }}>
+                <StyledTableCell
+                  style={{ background: "#ddd", padding: 0, height: 10 }}
+                >
                   {" "}
                   <IconButton
                     style={{ float: "right" }}
@@ -183,7 +200,15 @@ export default function ChildDataRightTable(props) {
                     <CalendarTodayIcon sx={{ fontSize: 20 }} />
                   </IconButton>
                 </StyledTableCell>
-                <StyledTableCell style={{ margin: 0, textAlign: "center" }}>
+                <StyledTableCell
+                  style={{
+                    background: "#ddd",
+                    padding: 0,
+                    height: 10,
+                    margin: 0,
+                    textAlign: "center",
+                  }}
+                >
                   {" "}
                   <IconButton
                     sx={{
@@ -204,7 +229,15 @@ export default function ChildDataRightTable(props) {
                 <StyledTableCell>
                   {/* {itemData.data.decription} */}
                 </StyledTableCell>
-                <StyledTableCell style={{ margin: 0, textAlign: "center" }}>
+                <StyledTableCell
+                  style={{
+                    background: "#ddd",
+                    padding: 0,
+                    height: 10,
+                    margin: 0,
+                    textAlign: "center",
+                  }}
+                >
                   {" "}
                   <IconButton
                     sx={{
@@ -250,6 +283,9 @@ export default function ChildDataRightTable(props) {
         handleCloseModal={handleCloseModal}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        selectSupplier={selectSupplier}
+        itemSupplier={selectSupplier.itemSupplier}
+        setSelectSupplier={setSelectSupplier}
       />
     </>
   );

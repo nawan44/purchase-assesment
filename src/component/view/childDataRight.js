@@ -5,6 +5,10 @@ import { Typography } from "@mui/material";
 
 export default function ChildDataRight(props) {
   const { lihatData, setLihatData, itemData } = props;
+  const [selectSupplier, setSelectSupplier] = React.useState({
+    itemSupplier: "",
+  });
+
   const [openRow, setOpenRow] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => {
@@ -108,6 +112,9 @@ export default function ChildDataRight(props) {
         openModal={openModal}
         setOpenModal={setOpenModal}
         handleOpenModal={handleOpenModal}
+        selectSupplier={selectSupplier}
+        setSelectSupplier={setSelectSupplier}
+        itemSupplier={selectSupplier.itemSupplier}
       />
     </div>
   );

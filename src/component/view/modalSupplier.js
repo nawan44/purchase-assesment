@@ -65,7 +65,15 @@ const style = {
 };
 
 export default function ModalSupplier(props) {
-  const { openModal, handleCloseModal, handleOpenModal } = props;
+  const {
+    openModal,
+    handleCloseModal,
+    handleOpenModal,
+    selectSupplier,
+    itemSupplier,
+    setSelectSupplier,
+    setOpenModal,
+  } = props;
   // const [click, setClick] = React.useState(false);
   // const [rows, setRows] = React.useState(dataDummySupplier);
   // const [searched, setSearched] = React.useState("");
@@ -125,9 +133,11 @@ export default function ModalSupplier(props) {
             </div>
             <div
               onClick={handleCloseModal}
-              style={{ width: "10%", float: "right", padding: "10px 0" }}
+              style={{ width: "10%", float: "right", padding: " 0" }}
             >
-              <CloseIcon style={{ color: "#fff", fontWeight: "bold" }} />
+              <IconButton>
+                <CloseIcon style={{ color: "#fff", fontWeight: "bold" }} />
+              </IconButton>
             </div>
           </div>
           <div
@@ -205,8 +215,16 @@ export default function ModalSupplier(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredData.map((row) => (
-                    <StyledTableRow key={row.supplierCode}>
+                  {filteredData.map((itemSupplier) => (
+                    <StyledTableRow
+                      onClick={() => {
+                        setSelectSupplier({
+                          itemSupplier,
+                        });
+                        setOpenModal(false);
+                      }}
+                      key={itemSupplier.supplierCode}
+                    >
                       <StyledTableCell
                         style={{ padding: "2px 0", textAlign: "center" }}
                         component="th"
@@ -223,22 +241,34 @@ export default function ModalSupplier(props) {
                             borderColor: "primary.main",
                           }}
                         >
-                          {row.supplierCode}
+                          {itemSupplier.supplierCode}
                         </Button>
                       </StyledTableCell>
                       <StyledTableCell style={{ padding: "0 5px" }}>
                         {" "}
-                        {row.supplierName}
+                        {itemSupplier.supplierName}
                       </StyledTableCell>
                       <StyledTableCell style={{ padding: "0 5px" }}>
                         {" "}
-                        {row.localForeign}
+                        {itemSupplier.localForeign}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
               </Table>
             </TableContainer>
+            <Button
+              variant="contained"
+              onClick={handleCloseModal}
+              style={{
+                background: "#00388B",
+                float: "right",
+                margin: "40px 0 40px 0",
+                textTransform: "none",
+              }}
+            >
+              Cancel
+            </Button>
           </div>
         </div>
       </Modal>
