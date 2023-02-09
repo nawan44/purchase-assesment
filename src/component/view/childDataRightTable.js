@@ -1,4 +1,6 @@
-import * as React from "react";
+// import * as React from "react";
+import React, { useState, useEffect } from "react";
+
 import { styled } from "@mui/material/styles";
 import {
   Button,
@@ -26,6 +28,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import InputBase from "@mui/material/InputBase";
 import dataDummySupplier from "../../data/dummySupplier";
+import ModalSupplier from "./modalSupplier";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -89,6 +92,8 @@ const style = {
 
 export default function ChildDataRightTable(props) {
   const { itemData, openRow, handleOpenModal, openModal, setOpenModal } = props;
+  // const [form] = Input.useForm();
+
   const handleCloseModal = () => setOpenModal(false);
 
   console.log("itemData /////////", itemData);
@@ -237,150 +242,15 @@ export default function ChildDataRightTable(props) {
         Save
       </Button>
       {/* <div sx={style}> */}
-      <Modal
-        open={openModal}
-        close={handleCloseModal}
-        aria-labelledby="simple-modal-title"
-      >
-        <div className="modal-size">
-          <div style={{ width: "100%", height: "45px", background: "#073E8B" }}>
-            <div
-              style={{
-                width: "90%",
-                float: "left",
-                padding: "10px 60px",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: "20px",
-              }}
-            >
-              Search
-            </div>
-            <div
-              onClick={handleCloseModal}
-              style={{ width: "10%", float: "right", padding: "10px 0" }}
-            >
-              <CloseIcon style={{ color: "#fff", fontWeight: "bold" }} />
-            </div>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "80px",
-              background: "#fff",
-              padding: "15px 60px",
-            }}
-          >
-            <div
-              style={{
-                padding: "10px 0",
-                width: "30%",
-                float: "left",
-                fontWeight: "bold",
-              }}
-            >
-              Supplier Name
-            </div>
-            <div style={{ width: "70%", float: "left" }}>
-              <Input
-                sx={{
-                  width: 560,
-                  border: "1px solid #ddd",
-                  // boxShadow: 1,
-                }}
-                id="standard-adornment-password"
-                // type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      type="button"
-                      // sx={{ p: "10px" }}
-                      sx={{
-                        padding: 2,
-                        width: 10,
-                        height: 10,
-                        borderRadius: 1,
-                        border: "1px solid",
-                        background: "#073E8B",
-                        borderColor: "primary.main",
-                      }}
-                      aria-label="search"
-                    >
-                      <SearchIcon sx={{ color: "#fff" }} />
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />{" "}
-            </div>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "#fff",
-              padding: "5px 50px",
-            }}
-          >
-            <TableContainer component={Paper}>
-              <Table
-                style={{ width: "100%" }}
-                size="small"
-                aria-label="customized table"
-              >
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Supplier Code</StyledTableCell>
-                    <StyledTableCell>Supplier Name</StyledTableCell>
-                    <StyledTableCell>Local/Foreign</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {dataDummySupplier &&
-                    dataDummySupplier.map((row) => (
-                      <StyledTableRow key={row.supplierCode}>
-                        <StyledTableCell
-                          style={{ padding: "2px 0", textAlign: "center" }}
-                          component="th"
-                          scope="row"
-                        >
-                          <Button
-                            onClick={handleOpenModal}
-                            style={{ textAlign: "center" }}
-                            size="small"
-                            sx={{
-                              padding: 0,
-                              borderRadius: 1,
-                              border: "1px solid",
-                              borderColor: "primary.main",
-                            }}
-                          >
-                            {row.supplierCode}
-                          </Button>
-                        </StyledTableCell>
-                        <StyledTableCell style={{ padding: "0 5px" }}>
-                          {" "}
-                          {row.supplierName}
-                        </StyledTableCell>
-                        <StyledTableCell style={{ padding: "0 5px" }}>
-                          {" "}
-                          {row.localForeign}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-        </div>
-      </Modal>
+
       {/* </div> */}
 
-      {/* <ModalSupplier
+      <ModalSupplier
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
         openModal={openModal}
         setOpenModal={setOpenModal}
-      /> */}
+      />
     </>
   );
 }

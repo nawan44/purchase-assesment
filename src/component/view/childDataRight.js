@@ -87,6 +87,7 @@ export default function ChildDataRight(props) {
             variant="contained"
             size="small"
             style={{
+              color: "#fff",
               background: "#00388B",
               fontWeight: "bold",
               textTransform: "none",
@@ -94,6 +95,7 @@ export default function ChildDataRight(props) {
             onClick={() => {
               setOpenRow(true);
             }}
+            disabled={lihatData ? false : true}
           >
             + Tambah
           </Button>
