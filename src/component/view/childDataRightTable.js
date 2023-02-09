@@ -14,20 +14,18 @@ import {
   Modal,
   Box,
   Typography,
+  Card,
+  TextField,
+  Input,
+  InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-// import { red } from "@mui/material/colors";
-// import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-// import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
+import dataDummySupplier from "../../data/dummySupplier";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -82,7 +80,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 800,
+  width: 300,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -240,66 +238,140 @@ export default function ChildDataRightTable(props) {
       </Button>
       {/* <div sx={style}> */}
       <Modal
-        keepMounted
         open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        close={handleCloseModal}
+        aria-labelledby="simple-modal-title"
       >
-        <Box sx={style}>
-          <div style={{ width: "100%", height: "30px", background: "#073E8B" }}>
-            <div style={{ width: "90%", float: "left" }}>Search</div>
-            <div style={{ width: "10%", float: "left" }}>
-              <CloseIcon />
+        <div className="modal-size">
+          <div style={{ width: "100%", height: "45px", background: "#073E8B" }}>
+            <div
+              style={{
+                width: "90%",
+                float: "left",
+                padding: "10px 60px",
+                color: "#fff",
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            >
+              Search
+            </div>
+            <div
+              onClick={handleCloseModal}
+              style={{ width: "10%", float: "right", padding: "10px 0" }}
+            >
+              <CloseIcon style={{ color: "#fff", fontWeight: "bold" }} />
             </div>
           </div>
-          <div style={{ width: "100%", height: "50px", background: "green" }}>
-            <div style={{ padding: "10px 0", width: "30%", float: "left" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "80px",
+              background: "#fff",
+              padding: "15px 60px",
+            }}
+          >
+            <div
+              style={{
+                padding: "10px 0",
+                width: "30%",
+                float: "left",
+                fontWeight: "bold",
+              }}
+            >
               Supplier Name
             </div>
             <div style={{ width: "70%", float: "left" }}>
-              <Paper
-                component="form"
+              <Input
                 sx={{
-                  p: "2px 4px",
-                  display: "flex",
-                  alignItems: "center",
-                  width: 400,
+                  width: 560,
+                  border: "1px solid #ddd",
+                  // boxShadow: 1,
                 }}
-              >
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  inputProps={{ "aria-label": "search google maps" }}
-                />
-                <IconButton
-                  type="button"
-                  // sx={{ p: "10px" }}
-                  sx={{
-                    padding: 2,
-                    width: 10,
-                    height: 10,
-                    borderRadius: 1,
-                    border: "1px solid",
-                    background: "#073E8B",
-                    borderColor: "primary.main",
-                  }}
-                  aria-label="search"
-                >
-                  <SearchIcon sx={{ color: "#fff" }} />
-                </IconButton>
-              </Paper>
+                id="standard-adornment-password"
+                // type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      type="button"
+                      // sx={{ p: "10px" }}
+                      sx={{
+                        padding: 2,
+                        width: 10,
+                        height: 10,
+                        borderRadius: 1,
+                        border: "1px solid",
+                        background: "#073E8B",
+                        borderColor: "primary.main",
+                      }}
+                      aria-label="search"
+                    >
+                      <SearchIcon sx={{ color: "#fff" }} />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />{" "}
             </div>
           </div>
-        </Box>
-
-        {/* <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box> */}
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              background: "#fff",
+              padding: "5px 50px",
+            }}
+          >
+            <TableContainer component={Paper}>
+              <Table
+                style={{ width: "100%" }}
+                size="small"
+                aria-label="customized table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Supplier Code</StyledTableCell>
+                    <StyledTableCell>Supplier Name</StyledTableCell>
+                    <StyledTableCell>Local/Foreign</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dataDummySupplier &&
+                    dataDummySupplier.map((row) => (
+                      <StyledTableRow key={row.supplierCode}>
+                        <StyledTableCell
+                          style={{ padding: "2px 0", textAlign: "center" }}
+                          component="th"
+                          scope="row"
+                        >
+                          <Button
+                            onClick={handleOpenModal}
+                            style={{ textAlign: "center" }}
+                            size="small"
+                            sx={{
+                              padding: 0,
+                              borderRadius: 1,
+                              border: "1px solid",
+                              borderColor: "primary.main",
+                            }}
+                          >
+                            {row.supplierCode}
+                          </Button>
+                        </StyledTableCell>
+                        <StyledTableCell style={{ padding: "0 5px" }}>
+                          {" "}
+                          {row.supplierName}
+                        </StyledTableCell>
+                        <StyledTableCell style={{ padding: "0 5px" }}>
+                          {" "}
+                          {row.localForeign}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </div>
       </Modal>
       {/* </div> */}
 

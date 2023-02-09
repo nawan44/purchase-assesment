@@ -2,6 +2,7 @@ import TopBar from "./appBar";
 import ChildData from "./childData";
 import ChildMenu from "./childMenu";
 import MenuBar from "./menuBar";
+import "../../assets/style/style.css";
 
 const Layout = () => {
   return (
