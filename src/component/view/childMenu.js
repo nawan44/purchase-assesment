@@ -8,6 +8,7 @@ export default function ChildMenu() {
         borderRadius: "7px  7px 0px 0px ",
         background: "#00388B",
         height: "50px",
+        maxWidth: 2575,
       }}
     >
       <h5 style={{ color: "#fff", fontWeight: "bold", textAlign: "left" }}>

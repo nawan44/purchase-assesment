@@ -1,6 +1,8 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import ChildDataRightTable from "./childDataRightTable";
+import ChildDataRightTablePrice from "./childDataRightTablePrice";
+import ChildDataRightTableHistory from "./childDataRightTableHistory";
+
 import { Typography } from "@mui/material";
 
 export default function ChildDataRight(props) {
@@ -8,15 +10,15 @@ export default function ChildDataRight(props) {
   const [selectSupplier, setSelectSupplier] = React.useState({
     itemSupplier: "",
   });
+  const [buttonHistory, setButtonHistory] = React.useState(false);
+  const [buttonPrice, setButtonPrice] = React.useState(true);
 
   const [openRow, setOpenRow] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => {
     setOpenModal(true);
-    console.log("AAAA");
   };
 
-  console.log("itemData==============", itemData);
   return (
     <div
       style={{
@@ -33,14 +35,18 @@ export default function ChildDataRight(props) {
       >
         <div
           style={{
-            background: "#00388B",
+            background: buttonPrice == true ? "#00388B" : "#ddd",
             fontWeight: "bold",
-            color: "#fff",
+            color: buttonPrice == true ? "#fff" : "#000",
             width: "12%",
             float: "left",
             textAlign: "center",
             padding: "5px",
             borderRadius: "5px",
+          }}
+          onClick={() => {
+            setButtonHistory(false);
+            setButtonPrice(true);
           }}
         >
           Price List
@@ -48,12 +54,16 @@ export default function ChildDataRight(props) {
         <div
           style={{
             fontWeight: "bold",
-            background: "#ddd",
-            color: "#000",
+            background: buttonPrice == true ? "#ddd" : "#00388B",
+            color: buttonPrice == true ? "#000" : "#fff",
             width: "88%",
             float: "left",
             textAlign: "left",
             padding: "5px 20px",
+          }}
+          onClick={() => {
+            setButtonHistory(true);
+            setButtonPrice(false);
           }}
         >
           PO History{" "}
@@ -87,35 +97,53 @@ export default function ChildDataRight(props) {
           )}
         </div>
         <div style={{ width: "10%", float: "right" }}>
-          <Button
-            variant="contained"
-            size="small"
-            style={{
-              color: "#fff",
-              background: "#00388B",
-              fontWeight: "bold",
-              textTransform: "none",
-            }}
-            onClick={() => {
-              setOpenRow(true);
-            }}
-            disabled={lihatData ? false : true}
-          >
-            + Tambah
-          </Button>
+          {buttonHistory == true ? (
+            <div></div>
+          ) : (
+            <Button
+              variant="contained"
+              size="small"
+              style={{
+                color: "#fff",
+                background: "#00388B",
+                fontWeight: "bold",
+                textTransform: "none",
+              }}
+              onClick={() => {
+                setOpenRow(true);
+              }}
+              disabled={lihatData ? false : true}
+            >
+              + Tambah
+            </Button>
+          )}
         </div>
       </div>
-      <ChildDataRightTable
-        itemData={itemData}
-        openRow={openRow}
-        setOpenRow={setOpenRow}
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        handleOpenModal={handleOpenModal}
-        selectSupplier={selectSupplier}
-        setSelectSupplier={setSelectSupplier}
-        itemSupplier={selectSupplier.itemSupplier}
-      />
+      {buttonHistory == false ? (
+        <ChildDataRightTablePrice
+          itemData={itemData}
+          openRow={openRow}
+          setOpenRow={setOpenRow}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          handleOpenModal={handleOpenModal}
+          selectSupplier={selectSupplier}
+          setSelectSupplier={setSelectSupplier}
+          itemSupplier={selectSupplier.itemSupplier}
+        />
+      ) : (
+        <ChildDataRightTableHistory
+          itemData={itemData}
+          openRow={openRow}
+          setOpenRow={setOpenRow}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          handleOpenModal={handleOpenModal}
+          selectSupplier={selectSupplier}
+          setSelectSupplier={setSelectSupplier}
+          itemSupplier={selectSupplier.itemSupplier}
+        />
+      )}
     </div>
   );
 }

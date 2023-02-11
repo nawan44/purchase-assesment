@@ -55,7 +55,6 @@ export default function ChildDataLeftTable(props) {
   } = props;
   // const [age, setAge] = React.useState("");
 
-  console.log("selectData", selectData);
   // const handleChange = (event) => {
   //   setAge(event.target.value);
   // };

@@ -1,14 +1,33 @@
 .modal-size {
-    position: fixed;
-    background: lightblue;
-    width: 50%;
-    height: 50%;
-  
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-  
-    transform: translate(-50%, -50%);
-  }
-  
+  position: fixed;
+  background: lightblue;
+  width: 50%;
+  height: 50%;
+
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+
+  transform: translate(-50%, -50%);
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+  height: 90px;
+}
+
+input[type=date]::-webkit-datetime-edit {
+  display: none;
+}
+
+input[type=date] {
+  width: 100px;
+}
+
+/* input[type=date]:required:invalid::-webkit-datetime-edit {
+  color: transparent;
+}
+
+input[type=date]:focus::-webkit-datetime-edit {
+  color: black !important;
+} */

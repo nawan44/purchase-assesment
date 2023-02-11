@@ -19,7 +19,6 @@ export default function ChildDataLeft(props) {
     setAge(event.target.value);
   };
 
-  console.log("data", dataDummy);
   return (
     <div
       style={{

@@ -27,7 +27,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import InputBase from "@mui/material/InputBase";
-import dataDummySupplier from "../../data/dummySupplier";
 import dummySupplier from "../../data/dummySupplier";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -73,6 +72,7 @@ export default function ModalSupplier(props) {
     itemSupplier,
     setSelectSupplier,
     setOpenModal,
+    setSave,
   } = props;
   // const [click, setClick] = React.useState(false);
   // const [rows, setRows] = React.useState(dataDummySupplier);
@@ -104,11 +104,6 @@ export default function ModalSupplier(props) {
   const handleChangeData = (event) => {
     setFilter(event.target.value);
   };
-  console.log("dummySupplier >>>>>>", dummySupplier);
-  console.log("lowercasedFilter >>>>>>", lowercasedFilter);
-
-  console.log("filter >>>>>>", filter);
-  console.log("filteredData -----------", filteredData);
 
   return (
     <div>
@@ -222,6 +217,7 @@ export default function ModalSupplier(props) {
                           itemSupplier,
                         });
                         setOpenModal(false);
+                        setSave(false);
                       }}
                       key={itemSupplier.supplierCode}
                     >
