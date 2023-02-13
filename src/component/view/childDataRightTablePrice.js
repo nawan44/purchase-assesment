@@ -225,7 +225,7 @@ export default function ChildDataRightTablePrice(props) {
                   padding: 1,
                   textAlign: "center",
                   fontSize: "13px",
-                  width: 20,
+                  width: 70,
                 }}
               >
                 Qty. Pricing
