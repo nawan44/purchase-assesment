@@ -160,34 +160,84 @@ export default function ChildDataRightTablePrice(props) {
         >
           <TableHead>
             <TableRow>
-              <StyledTableCell sx={{ textAlign: "center" }}>
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 80,
+                }}
+              >
                 Vendor
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center", width: 100 }}>
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 100,
+                }}
+              >
                 Vendor Name
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center" }}>
-                Local/Foreign
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 120,
+                }}
+              >
+                Local / Foreign
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center" }}>
+              <StyledTableCell
+                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+              >
                 Currency
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center" }}>
+              <StyledTableCell
+                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+              >
                 Price
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center", width: 120 }}>
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 120,
+                }}
+              >
                 Date
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center", width: 20 }}>
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 20,
+                }}
+              >
                 Qty. Pricing
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center", width: 80 }}>
+              <StyledTableCell
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "14px",
+                  width: 80,
+                }}
+              >
                 Min. Order
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center" }}>
+              <StyledTableCell
+                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+              >
                 Decription
               </StyledTableCell>
-              <StyledTableCell sx={{ textAlign: "center" }}></StyledTableCell>
+              <StyledTableCell
+                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+              ></StyledTableCell>
             </TableRow>
           </TableHead>
           {openRow && (
@@ -208,12 +258,11 @@ export default function ChildDataRightTablePrice(props) {
                     style={{
                       width: "50%",
                       float: "left",
-                      padding: "10px 3px",
+                      padding: "10px 5px",
                     }}
                   >
                     {save == true ? "" : itemSupplier.supplierCode}
                   </div>
-
                   <IconButton
                     onClick={handleOpenModal}
                     style={{ float: "right" }}
@@ -237,10 +286,9 @@ export default function ChildDataRightTablePrice(props) {
                 <StyledTableCell
                   sx={{
                     background: itemSupplier.supplierName ? "#ddd" : "#fff",
-                    padding: 0,
+                    padding: "0px 5px",
                     height: 10,
                     width: 30,
-                    padding: 0,
                   }}
                   component="th"
                 >

@@ -154,68 +154,68 @@ export default function ChildDataRightTable(props) {
           <TableHead>
             <TableRow>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 85, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 85, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 PO No.
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 70, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 70, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 PO Date
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 100, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 100, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 Vendor
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 PO Qty
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 PO unit
               </StyledTableCell>
               <StyledTableCell
                 sx={{ textAlign: "center", width: 20, padding: 0 }}
-                style={{ fontSize: 18 }}
+                style={{ fontSize: 15 }}
               >
                 Currency
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 80, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 80, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 Unit Price
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 Disc.
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 VAT
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 Inv. Qty
               </StyledTableCell>
               <StyledTableCell
-                sx={{ textAlign: "center", width: 50, padding: 2 }}
-                style={{ fontSize: 18 }}
+                sx={{ textAlign: "center", width: 50, padding: 1 }}
+                style={{ fontSize: 15 }}
               >
                 Inv. Unit
               </StyledTableCell>
@@ -232,7 +232,7 @@ export default function ChildDataRightTable(props) {
                       padding: "5px 0 5px 10px",
                       textAlign: "left",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                     scope="row"
                   >
@@ -247,7 +247,7 @@ export default function ChildDataRightTable(props) {
                       padding: 0,
                       textAlign: "center",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.poDate}
@@ -258,7 +258,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 0 0 10px",
                       textAlign: "left",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.vendor}
@@ -269,7 +269,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 10px 0 0",
                       textAlign: "right",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.poQty}
@@ -280,7 +280,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 0 0 10px",
                       textAlign: "left",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.poUnit}{" "}
@@ -291,7 +291,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 0 0 10px",
                       textAlign: "left",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.currency}{" "}
@@ -302,7 +302,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 10px 0 0",
                       textAlign: "right",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.unitPrice}{" "}
@@ -313,7 +313,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 10px 0 0",
                       textAlign: "right",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.disc}{" "}
@@ -324,7 +324,7 @@ export default function ChildDataRightTable(props) {
                       padding: 0,
                       textAlign: "center",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.vat}{" "}
@@ -335,7 +335,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 10px 0 0",
                       textAlign: "right",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.invQty}{" "}
@@ -346,7 +346,7 @@ export default function ChildDataRightTable(props) {
                       padding: "0 0 0 10px",
                       textAlign: "left",
                     }}
-                    style={{ fontSize: 18 }}
+                    style={{ fontSize: 14 }}
                     component="th"
                   >
                     {row.invUnit}{" "}
