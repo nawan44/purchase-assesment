@@ -26,6 +26,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModalSupplier from "./modalSupplier";
+import { fontSize } from "@mui/system";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -163,7 +164,7 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   width: 80,
                 }}
               >
@@ -173,7 +174,7 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   width: 100,
                 }}
               >
@@ -183,19 +184,29 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
-                  width: 120,
+                  fontSize: "13px",
+                  width: 90,
                 }}
               >
                 Local / Foreign
               </StyledTableCell>
               <StyledTableCell
-                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+                sx={{
+                  width: 70,
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "13px",
+                }}
               >
                 Currency
               </StyledTableCell>
               <StyledTableCell
-                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+                sx={{
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "13px",
+                  width: 80,
+                }}
               >
                 Price
               </StyledTableCell>
@@ -203,8 +214,8 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
-                  width: 120,
+                  fontSize: "13px",
+                  width: 100,
                 }}
               >
                 Date
@@ -213,7 +224,7 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   width: 20,
                 }}
               >
@@ -223,19 +234,28 @@ export default function ChildDataRightTablePrice(props) {
                 sx={{
                   padding: 1,
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: "13px",
                   width: 80,
                 }}
               >
                 Min. Order
               </StyledTableCell>
               <StyledTableCell
-                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+                sx={{
+                  width: 100,
+                  padding: 1,
+                  textAlign: "center",
+                  fontSize: "13px",
+                }}
               >
                 Decription
               </StyledTableCell>
               <StyledTableCell
-                sx={{ padding: 1, textAlign: "center", fontSize: "14px" }}
+                sx={{
+                  width: 20,
+                  padding: 1,
+                  textAlign: "center",
+                }}
               ></StyledTableCell>
             </TableRow>
           </TableHead>
@@ -257,6 +277,7 @@ export default function ChildDataRightTablePrice(props) {
                       width: "50%",
                       float: "left",
                       padding: "10px 5px",
+                      fontSize: "13px",
                     }}
                   >
                     {save == true ? "" : itemSupplier.supplierCode}
@@ -287,6 +308,7 @@ export default function ChildDataRightTablePrice(props) {
                     width: 30,
                   }}
                   component="th"
+                  style={{ fontSize: "13px" }}
                 >
                   {save == true ? "" : itemSupplier.supplierName}
                 </StyledTableCell>
@@ -310,6 +332,7 @@ export default function ChildDataRightTablePrice(props) {
                       },
                       width: "100%",
                       padding: 0,
+                      fontSize: "13px",
                     }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -340,9 +363,14 @@ export default function ChildDataRightTablePrice(props) {
                       width: "100%",
                       padding: 0,
                     }}
+                    style={{ fontSize: "12px" }}
                     value={mataUang.currency}
                     onChange={handleChangeSelect("currency")}
                     SelectProps={{
+                      sx: {
+                        fontSize: "13px",
+                      },
+
                       renderValue: (option) => option.code,
                     }}
                   >
@@ -358,7 +386,6 @@ export default function ChildDataRightTablePrice(props) {
                     background: priceList.price ? "#ddd" : "#fff",
                     padding: 0,
                     height: 10,
-                    width: 30,
                   }}
                   component="th"
                 >
@@ -368,14 +395,22 @@ export default function ChildDataRightTablePrice(props) {
                     type="number"
                     name="price"
                     value={priceList.price}
+                    style={{
+                      width: "100%",
+                    }}
                     onChange={handleChange}
                     InputLabelProps={{
                       shrink: true,
                     }}
                     sx={{
                       "& fieldset": { border: "none" },
+                      fontSize: "13px",
                     }}
                     InputProps={{
+                      sx: {
+                        fontSize: "13px",
+                      },
+
                       inputProps: { min: 0 },
                       disableUnderline: true,
                     }}
@@ -399,11 +434,16 @@ export default function ChildDataRightTablePrice(props) {
                       onChange={(newValue) => {
                         setTanggal(newValue);
                       }}
+                      InputProps={{
+                        style: {
+                          fontSize: "13px",
+                        },
+                      }}
                       renderInput={(params) => (
                         <TextField
+                          size="small"
                           sx={{
                             "& fieldset": { border: "none" },
-                            fontSize: 20,
                             textAlign: "right",
                           }}
                           {...params}
@@ -456,6 +496,9 @@ export default function ChildDataRightTablePrice(props) {
                       "& fieldset": { border: "none" },
                     }}
                     InputProps={{
+                      sx: {
+                        fontSize: "13px",
+                      },
                       inputProps: { min: 0 },
                       disableUnderline: true,
                     }}
@@ -469,6 +512,7 @@ export default function ChildDataRightTablePrice(props) {
                     width: 30,
                     margin: 0,
                     textAlign: "center",
+                    fontSize: "10px",
                   }}
                   component="th"
                 >
@@ -481,10 +525,16 @@ export default function ChildDataRightTablePrice(props) {
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    style={{ fontSize: "10px" }}
                     sx={{
-                      "& fieldset": { border: "none" },
+                      "& fieldset": { border: "none", fontSize: "10px" },
                     }}
-                    InputProps={{ disableUnderline: true }}
+                    InputProps={{
+                      sx: {
+                        fontSize: "13px",
+                      },
+                      disableUnderline: true,
+                    }}
                   />
                 </StyledTableCell>
                 <StyledTableCell

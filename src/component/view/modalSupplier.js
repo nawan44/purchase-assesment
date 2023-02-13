@@ -1,7 +1,5 @@
 import * as React from "react";
-
 import { styled } from "@mui/material/styles";
-
 import {
   Button,
   Table,
@@ -14,19 +12,11 @@ import {
   tableCellClasses,
   IconButton,
   Modal,
-  Box,
-  Typography,
-  Card,
-  TextField,
   Input,
   InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import CheckIcon from "@mui/icons-material/Check";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-import InputBase from "@mui/material/InputBase";
 import dummySupplier from "../../data/dummySupplier";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,35 +41,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function ModalSupplier(props) {
   const {
     openModal,
     handleCloseModal,
     handleOpenModal,
-    selectSupplier,
-    itemSupplier,
     setSelectSupplier,
     setOpenModal,
     setSave,
   } = props;
-  // const [click, setClick] = React.useState(false);
-  // const [rows, setRows] = React.useState(dataDummySupplier);
-  // const [searched, setSearched] = React.useState("");
-
   const [filter, setFilter] = React.useState("");
-
   const lowercasedFilter = filter.toString();
   // const lowercasedDummy = dummySupplier.map((x) =>
   //   Object.fromEntries(
@@ -158,13 +129,11 @@ export default function ModalSupplier(props) {
                 sx={{
                   width: 560,
                   border: "1px solid #ddd",
-                  // boxShadow: 1,
                 }}
                 id="standard-adornment-password"
                 value={filter}
                 onChange={handleChangeData}
                 onSearch={handleChangeData}
-                // type={showPassword ? "text" : "password"}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
