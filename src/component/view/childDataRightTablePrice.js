@@ -6,7 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import dummy from "../../data/dummy";
+import currency from "../../data/currency";
 import {
   Button,
   Table,
@@ -72,6 +72,7 @@ export default function ChildDataRightTablePrice(props) {
   const handleCloseModal = () => setOpenModal(false);
   const [checked, setChecked] = React.useState(true);
   const [save, setSave] = React.useState(false);
+  const [mataUang, setMataUang] = React.useState([]);
 
   const [tanggal, setTanggal] = React.useState(null);
   const [value, setValue] = React.useState(null);
@@ -95,13 +96,18 @@ export default function ChildDataRightTablePrice(props) {
       vendorName: itemSupplier.supplierName,
       qtyPricing: checked,
       date: tanggal,
+      currency: mataUang,
     });
   }, [
     tanggal,
     itemSupplier?.supplierCode,
     itemSupplier?.supplierName,
     checked,
+    mataUang,
   ]);
+  const handleChangeSelect = (event, value) => {
+    setMataUang(value);
+  };
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -148,7 +154,7 @@ export default function ChildDataRightTablePrice(props) {
 
     setTanggal(null);
   };
-  console.log("priceList", priceList);
+  console.log("currency", priceList);
 
   return (
     <>
@@ -348,8 +354,12 @@ export default function ChildDataRightTablePrice(props) {
                     value={priceList.currency}
                     onChange={handleChange}
                   >
-                    <MenuItem value="IDR">IDR</MenuItem>
-                    <MenuItem value="USD">USD</MenuItem>
+                    {currency.map((row) => (
+                      <MenuItem key={row.index} value={row.code}>
+                        {row.code}
+                        {/* - {row.name} */}
+                      </MenuItem>
+                    ))}
                   </Select>{" "}
                 </StyledTableCell>
                 <StyledTableCell
@@ -505,6 +515,7 @@ export default function ChildDataRightTablePrice(props) {
           )}
         </Table>
       </TableContainer>
+
       <Button
         size="small"
         variant="contained"

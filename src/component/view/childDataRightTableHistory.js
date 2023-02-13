@@ -34,7 +34,7 @@ import moment from "moment";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import dummy1 from "../../data/dummy1";
+import dummyPoHistory from "../../data/dummyPoHistory";
 // import AdapterDateFns from "@mui/lab/AdapterDateFns";
 // import LocalizationProvider from "@mui/lab/LocalizationProvider";
 // import TimePicker from "@mui/lab/TimePicker";
@@ -140,8 +140,6 @@ export default function ChildDataRightTable(props) {
   // const handleChange = (event) => {
   //   setChecked(event.target.checked);
   // };
-  console.log("dummy /////////", dummy1);
-  console.log("dummySupplier /////////", dummySupplier);
 
   return (
     <>
@@ -223,9 +221,9 @@ export default function ChildDataRightTable(props) {
           </TableHead>
           {/* {openRow && ( */}
           <TableBody>
-            {dummy1 &&
-              dummy1.map((row) => (
-                <StyledTableRow key={dummy1.productId}>
+            {dummyPoHistory &&
+              dummyPoHistory.map((row) => (
+                <StyledTableRow key={dummyPoHistory.productId}>
                   <StyledTableCell
                     sx={{
                       background: "#fff",
