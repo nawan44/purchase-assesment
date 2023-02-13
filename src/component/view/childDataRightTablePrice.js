@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../../assets/style/style.css";
 import { styled } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -67,7 +67,7 @@ export default function ChildDataRightTablePrice(props) {
     currency: currency[0],
   });
   const [tanggal, setTanggal] = React.useState(null);
-  const [value, setValue] = React.useState(null);
+  // const [value, setValue] = React.useState(null);
   const [priceList, setPriceList] = React.useState({
     vendor: itemSupplier?.supplierCode,
     vendorName: itemSupplier?.supplierName,
@@ -111,6 +111,7 @@ export default function ChildDataRightTablePrice(props) {
   const remove = (event) => {
     setOpenRow(false);
     setSave(true);
+    setSelectSupplier({ ...selectSupplier, itemSupplier: "" });
     setMataUang({ ...mataUang, currency: "" });
     setPriceList({
       ...priceList,
@@ -129,6 +130,7 @@ export default function ChildDataRightTablePrice(props) {
   };
   const submit = (event) => {
     setSave(true);
+    setSelectSupplier({ ...selectSupplier, itemSupplier: "" });
     setMataUang({ ...mataUang, currency: "" });
     setPriceList({
       ...priceList,
@@ -246,7 +248,6 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
-                    padding: 0,
                   }}
                   component="th"
                   scope="row"
@@ -266,9 +267,7 @@ export default function ChildDataRightTablePrice(props) {
                     sx={{
                       width: "30%",
                       float: "left",
-
                       padding: 2,
-                      width: 10,
                       height: 10,
                       margin: 0,
                       borderRadius: 1,
@@ -297,12 +296,12 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
-                    padding: 0,
                   }}
                   component="th"
                 >
                   <Select
                     name="localForeign"
+                    disabled={itemSupplier !== "" ? false : true}
                     value={priceList.localForeign}
                     variant="outlined"
                     sx={{
@@ -326,11 +325,11 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
-                    padding: 0,
                   }}
                   component="th"
                 >
                   <TextField
+                    disabled={itemSupplier !== "" ? false : true}
                     id="standard-select-currency"
                     select
                     size="small"
@@ -360,11 +359,11 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
-                    padding: 0,
                   }}
                   component="th"
                 >
                   <TextField
+                    disabled={itemSupplier !== "" ? false : true}
                     variant="outlined"
                     type="number"
                     name="price"
@@ -391,6 +390,7 @@ export default function ChildDataRightTablePrice(props) {
                 >
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
+                      disabled={itemSupplier !== "" ? false : true}
                       label=" "
                       value={tanggal}
                       onChange={(newValue) => {
@@ -420,7 +420,11 @@ export default function ChildDataRightTablePrice(props) {
                   <FormControl>
                     <FormControlLabel
                       control={
-                        <Checkbox checked={checked} onChange={handleChange} />
+                        <Checkbox
+                          disabled={itemSupplier !== "" ? false : true}
+                          checked={checked}
+                          onChange={handleChange}
+                        />
                       }
                     />
                   </FormControl>
@@ -436,6 +440,7 @@ export default function ChildDataRightTablePrice(props) {
                   component="th"
                 >
                   <TextField
+                    disabled={itemSupplier !== "" ? false : true}
                     variant="outlined"
                     type="number"
                     name="minOrder"
@@ -462,6 +467,7 @@ export default function ChildDataRightTablePrice(props) {
                   component="th"
                 >
                   <TextField
+                    disabled={itemSupplier !== "" ? false : true}
                     variant="outlined"
                     name="description"
                     value={priceList.description}
@@ -487,6 +493,7 @@ export default function ChildDataRightTablePrice(props) {
                 >
                   {" "}
                   <IconButton
+                    disabled={itemSupplier !== "" ? false : true}
                     sx={{
                       padding: 2,
                       width: 20,
