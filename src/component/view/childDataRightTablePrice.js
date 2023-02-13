@@ -1,11 +1,9 @@
-// import * as React from "react";
 import React, { useState, useEffect } from "react";
 import "../../assets/style/style.css";
 import { styled } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
 import currency from "../../data/currency";
 import {
   Button,
@@ -18,24 +16,17 @@ import {
   TableCell,
   tableCellClasses,
   IconButton,
-  Modal,
-  Box,
   FormControlLabel,
-  Card,
   TextField,
-  Input,
-  InputAdornment,
   Select,
   MenuItem,
   FormControl,
-  InputLabel,
-  makeStyles,
   Checkbox,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModalSupplier from "./modalSupplier";
-import moment from "moment";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#00388B",
@@ -72,11 +63,11 @@ export default function ChildDataRightTablePrice(props) {
   const handleCloseModal = () => setOpenModal(false);
   const [checked, setChecked] = React.useState(true);
   const [save, setSave] = React.useState(false);
-  const [mataUang, setMataUang] = React.useState([]);
-
+  const [mataUang, setMataUang] = React.useState({
+    currency: currency[0],
+  });
   const [tanggal, setTanggal] = React.useState(null);
   const [value, setValue] = React.useState(null);
-
   const [priceList, setPriceList] = React.useState({
     vendor: itemSupplier?.supplierCode,
     vendorName: itemSupplier?.supplierName,
@@ -96,7 +87,7 @@ export default function ChildDataRightTablePrice(props) {
       vendorName: itemSupplier.supplierName,
       qtyPricing: checked,
       date: tanggal,
-      currency: mataUang,
+      currency: mataUang.currency.code,
     });
   }, [
     tanggal,
@@ -105,12 +96,11 @@ export default function ChildDataRightTablePrice(props) {
     checked,
     mataUang,
   ]);
-  const handleChangeSelect = (event, value) => {
-    setMataUang(value);
+  const handleChangeSelect = (name) => (event) => {
+    setMataUang({ ...mataUang, [name]: event.target.value });
   };
   const handleChange = (event) => {
     event.preventDefault();
-
     setPriceList({
       ...priceList,
       [event.target.name]: event.target.value,
@@ -121,6 +111,7 @@ export default function ChildDataRightTablePrice(props) {
   const remove = (event) => {
     setOpenRow(false);
     setSave(true);
+    setMataUang({ ...mataUang, currency: "" });
     setPriceList({
       ...priceList,
       vendor: "",
@@ -138,6 +129,7 @@ export default function ChildDataRightTablePrice(props) {
   };
   const submit = (event) => {
     setSave(true);
+    setMataUang({ ...mataUang, currency: "" });
     setPriceList({
       ...priceList,
       vendor: "",
@@ -151,10 +143,9 @@ export default function ChildDataRightTablePrice(props) {
       description: "",
     });
     setChecked(false);
-
     setTanggal(null);
   };
-  console.log("currency", priceList);
+  console.log("priceList", priceList);
 
   return (
     <>
@@ -339,7 +330,10 @@ export default function ChildDataRightTablePrice(props) {
                   }}
                   component="th"
                 >
-                  <Select
+                  <TextField
+                    id="standard-select-currency"
+                    select
+                    size="small"
                     sx={{
                       "& fieldset": {
                         border: "none",
@@ -347,20 +341,18 @@ export default function ChildDataRightTablePrice(props) {
                       width: "100%",
                       padding: 0,
                     }}
-                    variant="outlined"
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="currency"
-                    value={priceList.currency}
-                    onChange={handleChange}
+                    value={mataUang.currency}
+                    onChange={handleChangeSelect("currency")}
+                    SelectProps={{
+                      renderValue: (option) => option.code,
+                    }}
                   >
                     {currency.map((row) => (
-                      <MenuItem key={row.index} value={row.code}>
-                        {row.code}
-                        {/* - {row.name} */}
+                      <MenuItem key={row.code} value={row}>
+                        {row.code} - {row.name}
                       </MenuItem>
                     ))}
-                  </Select>{" "}
+                  </TextField>
                 </StyledTableCell>
                 <StyledTableCell
                   sx={{

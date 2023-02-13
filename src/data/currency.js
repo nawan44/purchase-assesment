@@ -1,5 +1,14 @@
 export default [
   {
+    code: "",
+    name: "",
+    name_plural: "",
+    symbol: "",
+    symbol_native: "",
+    decimal_digits: 0,
+    rounding: 0,
+  },
+  {
     code: "EUR",
     name: "Euro",
     name_plural: "euros",
