@@ -375,7 +375,10 @@ export default function ChildDataRightTablePrice(props) {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
-                    InputProps={{ disableUnderline: true }}
+                    InputProps={{
+                      inputProps: { min: 0 },
+                      disableUnderline: true,
+                    }}
                   />
                 </StyledTableCell>
                 <StyledTableCell
@@ -452,7 +455,10 @@ export default function ChildDataRightTablePrice(props) {
                     sx={{
                       "& fieldset": { border: "none" },
                     }}
-                    InputProps={{ disableUnderline: true }}
+                    InputProps={{
+                      inputProps: { min: 0 },
+                      disableUnderline: true,
+                    }}
                   />
                 </StyledTableCell>
                 <StyledTableCell
