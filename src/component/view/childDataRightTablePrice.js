@@ -7,6 +7,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import currency from "../../data/currency";
 import {
   Button,
+  Stack,
+  Snackbar,
   Table,
   TableBody,
   TableContainer,
@@ -26,7 +28,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModalSupplier from "./modalSupplier";
-import { fontSize } from "@mui/system";
+import MuiAlert from "@mui/material/Alert";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,6 +51,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function ChildDataRightTablePrice(props) {
   const {
     itemData,
@@ -60,6 +66,24 @@ export default function ChildDataRightTablePrice(props) {
     itemSupplier,
     selectSupplier,
     setSelectSupplier,
+    errorVendor,
+    setErrorVendor,
+    errorVendorName,
+    setErrorVendorName,
+    errorLocalForeign,
+    setErrorLocalForeign,
+    errorCurrency,
+    setErrorCurrency,
+    errorPrice,
+    setErrorPrice,
+    errorDate,
+    setErrorDate,
+    errorQtyPricing,
+    setErrorQtyPricing,
+    errorMinOrder,
+    setErrorMinOrder,
+    errorDescription,
+    setErrorDescription,
   } = props;
   const handleCloseModal = () => setOpenModal(false);
   const [checked, setChecked] = React.useState(true);
@@ -68,7 +92,8 @@ export default function ChildDataRightTablePrice(props) {
     currency: currency[0],
   });
   const [tanggal, setTanggal] = React.useState(null);
-  // const [value, setValue] = React.useState(null);
+  const [openSnackBerhasil, setOpenSnackBerhasil] = React.useState(false);
+  const [openSnackGagal, setOpenSnackGagal] = React.useState(false);
   const [priceList, setPriceList] = React.useState({
     vendor: itemSupplier?.supplierCode,
     vendorName: itemSupplier?.supplierName,
@@ -97,17 +122,92 @@ export default function ChildDataRightTablePrice(props) {
     checked,
     mataUang,
   ]);
+  useEffect(
+    () => {
+      if (priceList.localForeign !== "") {
+        setErrorLocalForeign();
+      } else if (priceList.currency !== "") {
+        setErrorCurrency();
+      } else if (priceList.price !== "") {
+        setErrorPrice();
+      } else if (priceList.date !== "") {
+        setErrorDate();
+      } else if (priceList.qtyPricing !== "") {
+        setErrorPrice();
+      } else if (priceList.minOrder !== "") {
+        setErrorDate();
+      } else if (priceList.description !== "") {
+        setErrorDescription();
+      }
+    },
+    [priceList.localForeign],
+    [priceList.currency],
+    [priceList.price],
+    [priceList.date],
+    [priceList.qtyPricing],
+    [priceList.minOrder],
+    [priceList.description]
+  );
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBerhasil(false);
+    setOpenSnackGagal(false);
+  };
+
   const handleChangeSelect = (name) => (event) => {
     setMataUang({ ...mataUang, [name]: event.target.value });
+    setErrorCurrency(false);
   };
+
   const handleChange = (event) => {
     event.preventDefault();
     setPriceList({
       ...priceList,
       [event.target.name]: event.target.value,
     });
-
     setChecked(event.target.checked);
+    setErrorPrice(false);
+    setErrorDate(false);
+    // setTanggal(null);
+    setErrorQtyPricing(false);
+    setErrorMinOrder(false);
+    setErrorDescription(false);
+  };
+  const valid = () => {
+    if (priceList.vendor == "" || priceList.vendor == undefined) {
+      setErrorVendor("❌ Vendor Tidak Boleh Kosong");
+      setErrorVendorName("❌ Vendor Name Tidak Boleh Kosong");
+    } else if (
+      priceList.localForeign == "" ||
+      priceList.localForeign == undefined
+    ) {
+      setErrorLocalForeign("❌ Local / Foreign Tidak Boleh Kosong");
+    } else if (priceList.currency == "" || priceList.currency == undefined) {
+      setErrorCurrency("❌ Currency Tidak Boleh Kosong");
+    } else if (priceList.price == "" || priceList.price == undefined) {
+      setErrorPrice("❌ Price Tidak Boleh Kosong");
+    } else if (priceList.date == "" || priceList.date == undefined) {
+      setErrorDate("❌ Date Tidak Boleh Kosong");
+    }
+    // else if (
+    //   priceList.qtyPricing == "" ||
+    //   priceList.qtyPricing == undefined
+    // ) {
+    //   setErrorQtyPricing("❌ Qty Price Tidak Boleh Kosong");
+    // }
+    else if (priceList.minOrder == "" || priceList.minOrder == undefined) {
+      setErrorMinOrder("❌ Min Order Tidak Boleh Kosong");
+    } else if (
+      priceList.description == "" ||
+      priceList.description == undefined
+    ) {
+      setErrorDescription("❌ Description Tidak Boleh Kosong");
+    } else {
+      return false;
+    }
   };
   const remove = (event) => {
     setOpenRow(false);
@@ -128,27 +228,36 @@ export default function ChildDataRightTablePrice(props) {
     });
     setTanggal(null);
     setChecked(false);
+    setOpenSnackGagal(true);
   };
-  const submit = (event) => {
-    setSave(true);
-    setSelectSupplier({ ...selectSupplier, itemSupplier: "" });
-    setMataUang({ ...mataUang, currency: "" });
-    setPriceList({
-      ...priceList,
-      vendor: "",
-      vendorName: "",
-      localForeign: "",
-      currency: "",
-      price: "",
-      date: "",
-      qtyPricing: false,
-      minOrder: "",
-      description: "",
-    });
-    setChecked(false);
-    setTanggal(null);
+  const submit = async (values) => {
+    const aa = valid();
+    console.log("valid", aa);
+
+    if (aa == false) {
+      setSave(true);
+      setSelectSupplier({ ...selectSupplier, itemSupplier: "" });
+      setMataUang({ ...mataUang, currency: "" });
+      setPriceList({
+        ...priceList,
+        vendor: "",
+        vendorName: "",
+        localForeign: "",
+        currency: "",
+        price: "",
+        date: "",
+        qtyPricing: false,
+        minOrder: "",
+        description: "",
+      });
+      setChecked(false);
+      setTanggal(null);
+      setOpenSnackBerhasil(true);
+    } else {
+      console.log("ERROR");
+    }
   };
-  console.log("priceList", priceList);
+  console.log("errorCurrency", errorCurrency);
 
   return (
     <>
@@ -268,6 +377,10 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
+                    border:
+                      errorVendor === "❌ Vendor Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                   scope="row"
@@ -306,6 +419,10 @@ export default function ChildDataRightTablePrice(props) {
                     padding: "0px 5px",
                     height: 10,
                     width: 30,
+                    border:
+                      errorVendorName === "❌ Vendor Name Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                   style={{ fontSize: "13px" }}
@@ -318,6 +435,11 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
+                    border:
+                      errorLocalForeign ===
+                      "❌ Local / Foreign Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -348,6 +470,10 @@ export default function ChildDataRightTablePrice(props) {
                     padding: 0,
                     height: 10,
                     width: 30,
+                    border:
+                      errorCurrency === "❌ Currency Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -386,6 +512,10 @@ export default function ChildDataRightTablePrice(props) {
                     background: priceList.price ? "#ddd" : "#fff",
                     padding: 0,
                     height: 10,
+                    border:
+                      errorPrice === "❌ Price Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -423,6 +553,10 @@ export default function ChildDataRightTablePrice(props) {
                     height: 10,
                     width: 10,
                     textAlign: "center",
+                    border:
+                      errorDate === "❌ Date Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -433,6 +567,7 @@ export default function ChildDataRightTablePrice(props) {
                       value={tanggal}
                       onChange={(newValue) => {
                         setTanggal(newValue);
+                        setErrorDate(false);
                       }}
                       InputProps={{
                         style: {
@@ -457,6 +592,10 @@ export default function ChildDataRightTablePrice(props) {
                     background: checked ? "#ddd" : "#fff",
                     margin: 0,
                     textAlign: "center",
+                    border:
+                      errorQtyPricing === "❌ Qty Pricing Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -479,6 +618,10 @@ export default function ChildDataRightTablePrice(props) {
                     height: 10,
                     width: 30,
                     textAlign: "center",
+                    border:
+                      errorMinOrder === "❌ Min Order Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -513,6 +656,10 @@ export default function ChildDataRightTablePrice(props) {
                     margin: 0,
                     textAlign: "center",
                     fontSize: "10px",
+                    border:
+                      errorDescription === "❌ Description Tidak Boleh Kosong"
+                        ? "1px solid red"
+                        : "none",
                   }}
                   component="th"
                 >
@@ -565,7 +712,171 @@ export default function ChildDataRightTablePrice(props) {
                   </IconButton>
                 </StyledTableCell>
               </StyledTableRow>
-              {/* ))} */}
+              {/* {errorVendor && ( */}
+              {/* // || // errorVendorName == true || // errorLocalForeign == true
+              || // errorCurrency == true || // errorPrice == true || //
+              errorDate == true || // errorQtyPricing == true || //
+              errorMinOrder == true || // (errorDescription == true */}
+              <StyledTableRow key={itemData.productId}>
+                <StyledTableCell
+                  sx={{
+                    background: itemSupplier.supplierCode ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                  }}
+                  component="th"
+                  scope="row"
+                >
+                  {errorVendor && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorVendor}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: itemSupplier.supplierName ? "#ddd" : "#fff",
+                    padding: "0px 5px",
+                    height: 10,
+                    width: 30,
+                  }}
+                  component="th"
+                  style={{ fontSize: "13px" }}
+                >
+                  {errorVendorName && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorVendorName}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: priceList.localForeign ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorLocalForeign && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorLocalForeign}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: priceList.currency ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorCurrency && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorCurrency}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: priceList.price ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorPrice && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorPrice}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: tanggal ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 10,
+                    textAlign: "center",
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorDate && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorDate}{" "}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: checked ? "#ddd" : "#fff",
+                    margin: 0,
+                    textAlign: "center",
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorQtyPricing && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorQtyPricing}{" "}
+                    </span>
+                  )}
+                </StyledTableCell>{" "}
+                <StyledTableCell
+                  sx={{
+                    background: priceList.minOrder ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                    textAlign: "center",
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorMinOrder && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorMinOrder}{" "}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    background: priceList.description ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                    margin: 0,
+                    textAlign: "center",
+                    fontSize: "10px",
+                  }}
+                  component="th"
+                >
+                  {" "}
+                  {errorDescription && (
+                    <span style={{ color: "red", fontSize: "10px" }}>
+                      {errorDescription}
+                    </span>
+                  )}
+                </StyledTableCell>
+                <StyledTableCell
+                  sx={{
+                    // background: itemSupplier.supplierCode ? "#ddd" : "#fff",
+                    padding: 0,
+                    height: 10,
+                    width: 30,
+                    textAlign: "center",
+                  }}
+                  component="th"
+                ></StyledTableCell>
+              </StyledTableRow>
+              {/* )} */}
             </TableBody>
           )}
         </Table>
@@ -585,6 +896,35 @@ export default function ChildDataRightTablePrice(props) {
       >
         Save
       </Button>
+
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          open={openSnackBerhasil}
+          autoHideDuration={6000}
+          onClose={handleCloseSnack}
+        >
+          <Alert
+            onClose={handleCloseSnack}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Price List Berhasil Disimpan
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={openSnackGagal}
+          autoHideDuration={6000}
+          onClose={handleCloseSnack}
+        >
+          <Alert
+            onClose={handleCloseSnack}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Price List Berhasil Dihapus
+          </Alert>
+        </Snackbar>
+      </Stack>
 
       <ModalSupplier
         handleOpenModal={handleOpenModal}

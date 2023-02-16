@@ -3,10 +3,8 @@ import Button from "@mui/material/Button";
 import ChildDataRightTablePrice from "./childDataRightTablePrice";
 import ChildDataRightTableHistory from "./childDataRightTableHistory";
 
-import { Typography } from "@mui/material";
-
 export default function ChildDataRight(props) {
-  const { lihatData, setLihatData, itemData } = props;
+  const { lihatData, itemData } = props;
   const [selectSupplier, setSelectSupplier] = React.useState({
     itemSupplier: "",
   });
@@ -15,8 +13,21 @@ export default function ChildDataRight(props) {
 
   const [openRow, setOpenRow] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
+
+  const [errorVendor, setErrorVendor] = React.useState(false);
+  const [errorVendorName, setErrorVendorName] = React.useState(false);
+  const [errorLocalForeign, setErrorLocalForeign] = React.useState(false);
+  const [errorCurrency, setErrorCurrency] = React.useState(false);
+  const [errorPrice, setErrorPrice] = React.useState(false);
+  const [errorDate, setErrorDate] = React.useState(false);
+  const [errorQtyPricing, setErrorQtyPricing] = React.useState(false);
+  const [errorMinOrder, setErrorMinOrder] = React.useState(false);
+  const [errorDescription, setErrorDescription] = React.useState(false);
+
   const handleOpenModal = () => {
     setOpenModal(true);
+    setErrorVendor(false);
+    setErrorVendorName(false);
   };
 
   return (
@@ -130,6 +141,24 @@ export default function ChildDataRight(props) {
           selectSupplier={selectSupplier}
           setSelectSupplier={setSelectSupplier}
           itemSupplier={selectSupplier.itemSupplier}
+          errorVendor={errorVendor}
+          setErrorVendor={setErrorVendor}
+          errorVendorName={errorVendorName}
+          setErrorVendorName={setErrorVendorName}
+          errorLocalForeign={errorLocalForeign}
+          setErrorLocalForeign={setErrorLocalForeign}
+          errorCurrency={errorCurrency}
+          setErrorCurrency={setErrorCurrency}
+          errorPrice={errorPrice}
+          setErrorPrice={setErrorPrice}
+          errorDate={errorDate}
+          setErrorDate={setErrorDate}
+          errorQtyPricing={errorQtyPricing}
+          setErrorQtyPricing={setErrorQtyPricing}
+          errorMinOrder={errorMinOrder}
+          setErrorMinOrder={setErrorMinOrder}
+          errorDescription={errorDescription}
+          setErrorDescription={setErrorDescription}
         />
       ) : (
         <ChildDataRightTableHistory
